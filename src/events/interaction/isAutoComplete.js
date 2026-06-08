@@ -48,6 +48,7 @@ module.exports = async (client, interaction) => {
         .filter((country) =>
           country.name.toLowerCase().includes(value.toLowerCase()),
         )
+        .sort((a, b) => a.name.localeCompare(b.name))
         .slice(0, 25)
         .map((country) => ({
           name: country.name,

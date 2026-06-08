@@ -7,7 +7,6 @@ const {
   ButtonStyle,
   StringSelectMenuBuilder,
 } = require("discord.js");
-
 const serveurs = require("../../../util/option-serveur");
 
 module.exports = {
@@ -106,18 +105,6 @@ module.exports = {
       container.addActionRowComponents(row);
     }
 
-    const options = [
-      {
-        label: "Accueil",
-        value: `serveur-${serveur}-Accueil`,
-        default: true,
-      },
-      {
-        label: "Staff",
-        value: `serveur-${serveur}-Staff`,
-      },
-    ];
-
     container
       .addSeparatorComponents((separator) => separator)
       .addActionRowComponents(
@@ -125,7 +112,17 @@ module.exports = {
           new StringSelectMenuBuilder()
             .setCustomId("serveur")
             .setPlaceholder("Sélectionnez une option")
-            .addOptions(options),
+            .addOptions([
+              {
+                label: "Accueil",
+                value: `serveur-${serveur}-Accueil`,
+                default: true,
+              },
+              {
+                label: "Staff",
+                value: `serveur-${serveur}-Staff`,
+              },
+            ]),
         ),
       );
 

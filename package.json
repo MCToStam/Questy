@@ -14,9 +14,9 @@
     "undici": "6.21.3"
   },
   "dependencies": {
-    "discord.js": "^14.26.2",
-    "dotenv": "^17.2.3",
-    "mongoose": "^9.2.2",
+    "discord.js": "^14.26.4",
+    "dotenv": "^17.4.2",
+    "mongoose": "^9.6.3",
     "node-cron": "^4.2.1"
   },
   "devDependencies": {

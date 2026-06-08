@@ -6,7 +6,6 @@ const {
   ContainerBuilder,
   StringSelectMenuBuilder,
 } = require("discord.js");
-
 const serveurs = require("../../../../util/option-serveur");
 
 module.exports = {
@@ -29,7 +28,7 @@ module.exports = {
       .setAccentColor(parseInt(serveurData.colorHex.replace("#", ""), 16))
       .addTextDisplayComponents((t) =>
         t.setContent(
-          `## ${config.emoji_formate[serveur]} Serveur ${serveurData.displayName}${categorie !== "Acceuil" ? ` - ${categorie}` : ""}${
+          `## ${config.emoji_formate[serveur]} Serveur ${serveurData.displayName}${categorie !== "Accueil" ? ` - ${categorie}` : ""}${
             serveurData.description ? `\n*${serveurData.description}*` : ""
           }`,
         ),
@@ -158,29 +157,27 @@ module.exports = {
         });
     }
 
-    const options = [
-      {
-        label: "Accueil",
-        value: `serveur-${serveur}-Accueil`,
-        default: categorie === "Accueil",
-      },
-      {
-        label: "Staff",
-        value: `serveur-${serveur}-Staff`,
-        default: categorie === "Staff",
-      },
-    ];
-
-    container.addSeparatorComponents((s) => s);
-
-    container.addActionRowComponents(
-      new ActionRowBuilder().addComponents(
-        new StringSelectMenuBuilder()
-          .setCustomId("serveur")
-          .setPlaceholder("Sélectionnez une option")
-          .addOptions(options),
-      ),
-    );
+    container
+      .addSeparatorComponents((s) => s)
+      .addActionRowComponents(
+        new ActionRowBuilder().addComponents(
+          new StringSelectMenuBuilder()
+            .setCustomId("serveur")
+            .setPlaceholder("Sélectionnez une option")
+            .addOptions([
+              {
+                label: "Accueil",
+                value: `serveur-${serveur}-Accueil`,
+                default: categorie === "Accueil",
+              },
+              {
+                label: "Staff",
+                value: `serveur-${serveur}-Staff`,
+                default: categorie === "Staff",
+              },
+            ]),
+        ),
+      );
 
     await interaction.update({
       components: [container],

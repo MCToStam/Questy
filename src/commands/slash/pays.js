@@ -2,8 +2,9 @@ const {
   SlashCommandBuilder,
   MessageFlags,
   ContainerBuilder,
+  ActionRowBuilder,
+  StringSelectMenuBuilder,
 } = require("discord.js");
-
 const serveurs = require("../../../util/option-serveur");
 
 module.exports = {
@@ -61,6 +62,25 @@ module.exports = {
       .addTextDisplayComponents((t) =>
         t.setContent(
           `**Description :** ${data.country.description.replace(/§./g, "")}\n**Argent en Banque :** ${Math.floor(Number(data.country.money)).toLocaleString()}$\n**Power :** ${Math.floor(Number(data.country.power))}/${Math.floor(Number(data.country.powerMax))}\n**Nombre de Claim :** ${data.country.claimsCount}\n**Nombre de Membre :** ${data.country.memberCount}`,
+        ),
+      )
+      .addSeparatorComponents((separator) => separator)
+      .addActionRowComponents(
+        new ActionRowBuilder().addComponents(
+          new StringSelectMenuBuilder()
+            .setCustomId("pays")
+            .setPlaceholder("Sélectionnez une option")
+            .addOptions([
+              {
+                label: "Accueil",
+                value: `pays-${serveur}-${data.country.name}-Accueil`,
+                default: true,
+              },
+              {
+                label: "Coordonnées",
+                value: `pays-${serveur}-${data.country.name}-Coordonnées`,
+              },
+            ]),
         ),
       );
 
