@@ -1,0 +1,3 @@
+# Questy
+
+EarthQuest Bot Discord

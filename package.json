@@ -1,0 +1,27 @@
+{
+  "name": "gloryprojects",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "clean": "npx prettier . --write",
+    "format": "node .vscode/clean.js"
+  },
+  "author": "ToStam",
+  "license": "MIT",
+  "overrides": {
+    "undici": "6.21.3"
+  },
+  "dependencies": {
+    "discord.js": "^14.26.2",
+    "dotenv": "^17.2.3",
+    "mongoose": "^9.2.2",
+    "node-cron": "^4.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "eslint": "^9.38.0",
+    "globals": "^16.4.0"
+  }
+}
