@@ -43,10 +43,13 @@ module.exports = async (client, interaction) => {
       }
 
       const data = await response.json();
+      const STAFF_COUNTRIES = ["warzone", "safezone"];
 
       const countries = (data.countries || [])
-        .filter((country) =>
-          country.name.toLowerCase().includes(value.toLowerCase()),
+        .filter(
+          (country) =>
+            country.name.toLowerCase().includes(value.toLowerCase()) &&
+            !STAFF_COUNTRIES.includes(country.name.toLowerCase()),
         )
         .sort((a, b) => a.name.localeCompare(b.name))
         .slice(0, 25)

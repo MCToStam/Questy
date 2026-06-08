@@ -129,7 +129,7 @@ module.exports = {
       }
 
       const fhomeText = dataFHomeDynmap
-        ? `**FHome :** [${Math.floor(dataFHomeDynmap.x)} ${dataFHomeDynmap.y} ${Math.floor(dataFHomeDynmap.z)}](https://${serveur}.earthquest.fr/?worldname=earth&mapname=flat&zoom=4&x=${Math.floor(dataFHomeDynmap.x)}&y=64&z=${Math.floor(dataFHomeDynmap.z)})`
+        ? `**FHome :** [${Math.floor(dataFHomeDynmap.x)} ${dataFHomeDynmap.y} ${Math.floor(dataFHomeDynmap.z)}](https://${serveur}.earthquest.fr/?worldname=earth&mapname=flat&zoom=4&x=${Math.floor(dataFHomeDynmap.x)}&y=${Math.floor(dataFHomeDynmap.y)}&z=${Math.floor(dataFHomeDynmap.z)})`
         : `**FHome :** Aucun FHome`;
 
       const claimsText =

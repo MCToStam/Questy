@@ -105,6 +105,7 @@ module.exports = {
             t.setContent(
               `### ${config.emoji_formate[s.server_name]} Serveur ${s.server_display_name}\n` +
                 `**Statut :** ${s.is_online ? "En ligne" : "Hors ligne"}\n` +
+                `**Argent :** ${s.balance.toLocaleString()}$\n` +
                 `**Grade :** ${s.server_rank}\n` +
                 `**Power :** ${s.power || 0}/${s.power_max || 0}\n` +
                 `**Dernière Connexion :** <t:${Math.floor(new Date(s.last_seen_at).getTime() / 1000)}:R> • <t:${Math.floor(new Date(s.last_seen_at).getTime() / 1000)}:F>\n` +
