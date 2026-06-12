@@ -12,6 +12,7 @@ const {
 const { readdirSync, statSync, existsSync } = require("fs");
 const pathModule = require("path");
 const log = require("./util/module/log");
+const config = require("./config");
 const { connectMongo } = require("./util/database/index");
 const botLaunch = [];
 const client = new Client({
@@ -110,15 +111,15 @@ const init = async () => {
     client.on(eventName, event.bind(null, client));
   }
 
-  client.login(); /*.then(async () => {
-    const guild = client.guilds.cache.get("743741992194015314");
+  client.login().then(async () => {
+    const guild = client.guilds.cache.get(config.support_serveur_id);
     const guildCmds = guild.commands;
     const cmd = client.container.slashCmds;
     const cmdSlashs = cmd.filter((c) => c.data.name === "cmd");
     await guildCmds
       .set(cmdSlashs.map((c) => c.data))
       .catch((e) => console.log(e));
-  });*/
+  });
   log(`Node ${process.version} !`, "READY", "green");
 };
 

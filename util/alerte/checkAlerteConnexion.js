@@ -5,7 +5,7 @@ const envoyerAlerteMessage = require("../../util/alerte/envoyerAlerteMessage");
 const { TextDisplayBuilder, ContainerBuilder } = require("discord.js");
 
 async function checkAlerteConnexion(client, serveur) {
-  const url = `https://${serveur}.earthquest.fr/up/world/earth/${Date.now()}`;
+  const url = `${config.serveur[serveur].dynmap}/up/world/earth/${Date.now()}`;
 
   const res = await fetch(url);
   if (!res.ok) return;
@@ -31,7 +31,7 @@ async function checkAlerteConnexion(client, serveur) {
       .addTextDisplayComponents((t) =>
         t.setContent(
           `${emojiTete} **${alerte.cible}** vient de se ${verb} sur le serveur ` +
-            `${config.emoji_formate[serveur]} **${config.serveurName[serveur]}**.`,
+            `${config.serveur[serveur].emoji_formate} **${config.serveur[serveur].nom}**.`,
         ),
       );
 

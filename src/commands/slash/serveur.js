@@ -50,7 +50,7 @@ module.exports = {
       .setAccentColor(parseInt(serveurData.colorHex.replace("#", ""), 16))
       .addTextDisplayComponents((t) =>
         t.setContent(
-          `## ${config.emoji_formate[serveur]} Serveur ${serveurData.displayName}${serveurData.description ? `\n*${serveurData.description}*` : ""}`,
+          `## ${config.serveur[serveur].emoji_formate} Serveur ${serveurData.displayName}${serveurData.description ? `\n*${serveurData.description}*` : ""}`,
         ),
       )
       .addSeparatorComponents((s) => s)

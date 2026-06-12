@@ -29,7 +29,7 @@ module.exports = {
     const data = await res.json();
 
     const resDynmap = await fetch(
-      `https://${serveur}.earthquest.fr/tiles/_markers_/marker_earth.json`,
+      `${config.serveur[serveur].dynmap}/tiles/_markers_/marker_earth.json`,
     );
     const dataDynmap = await resDynmap.json();
 
@@ -49,9 +49,9 @@ module.exports = {
     const pageData = sousPowerCountries.slice(page * 7, (page + 1) * 7);
 
     const container = new ContainerBuilder()
-      .setAccentColor(config.couleur[serveur])
+      .setAccentColor(config.serveur[serveur].couleur)
       .addTextDisplayComponents((t) =>
-        t.setContent(`## ${config.emoji_formate[serveur]} Pays en Sous-Power`),
+        t.setContent(`## ${config[serveur].emoji_formate} Pays en Sous-Power`),
       )
       .addSeparatorComponents((s) => s);
 
@@ -65,14 +65,14 @@ module.exports = {
       );
 
       if (dataFHomeDynmap) {
-        coordTexte = `[${Math.floor(dataFHomeDynmap.x)} ${dataFHomeDynmap.y} ${Math.floor(dataFHomeDynmap.z)}](https://${serveur}.earthquest.fr/?worldname=earth&mapname=flat&zoom=4&x=${Math.floor(dataFHomeDynmap.x)}&y=${Math.floor(dataFHomeDynmap.y)}&z=${Math.floor(dataFHomeDynmap.z)})`;
+        coordTexte = `[${Math.floor(dataFHomeDynmap.x)} ${dataFHomeDynmap.y} ${Math.floor(dataFHomeDynmap.z)}](${config.serveur[serveur].dynmap}/?worldname=earth&mapname=flat&zoom=4&x=${Math.floor(dataFHomeDynmap.x)}&y=${Math.floor(dataFHomeDynmap.y)}&z=${Math.floor(dataFHomeDynmap.z)})`;
       } else {
         const dataPaysDynmap = Object.values(
           dataDynmap.sets["factions.markerset"].areas,
         ).filter((a) => a.label.toLowerCase() === country.name.toLowerCase());
 
         if (dataPaysDynmap.length > 1) {
-          coordTexte = `[${Math.floor(dataPaysDynmap[0].x[0])} 64 ${Math.floor(dataPaysDynmap[0].z[0])}](https://${serveur}.earthquest.fr/?worldname=earth&mapname=flat&zoom=4&x=${dataPaysDynmap[0].x[0]}&y=64&z=${dataPaysDynmap[0].z[0]})`;
+          coordTexte = `[${Math.floor(dataPaysDynmap[0].x[0])} 64 ${Math.floor(dataPaysDynmap[0].z[0])}](${config.serveur[serveur].dynmap}/?worldname=earth&mapname=flat&zoom=4&x=${dataPaysDynmap[0].x[0]}&y=64&z=${dataPaysDynmap[0].z[0]})`;
         }
       }
 

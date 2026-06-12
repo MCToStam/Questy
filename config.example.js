@@ -18,22 +18,23 @@ class config {
       modal: "",
       invitationBot: "",
     };
-    this.couleur = {
-      mars: 0xfe3636,
+    this.serveur = {
+      mars: {
+        nom: "Mars",
+        type: "java",
+        emoji: "1504814414443053136",
+        emoji_formate: "<:mars:1504814414443053136>",
+        couleur: 0xfe3636,
+        dynmap: "https://mars.earthquest.fr",
+      },
     };
-    this.liste_serveur = ["mars"];
-    this.serveurName = {
-      mars: "Mars",
-    };
-    this.emoji = {
-      mars: "1504814414443053136",
-    };
-    this.emoji_formate = Object.fromEntries(
-      Object.entries(this.emoji).map(([serveur, id]) => [
-        serveur,
-        `<:${serveur.toLowerCase()}:${id}>`,
-      ]),
-    );
+    this.liste_serveur = Object.keys(this.serveur);
+    this.liste_serveur_java = Object.entries(this.serveur)
+      .filter(([, data]) => data.type === "java")
+      .map(([name]) => name);
+    this.liste_serveur_bedrock = Object.entries(this.serveur)
+      .filter(([, data]) => data.type === "bedrock")
+      .map(([name]) => name);
   }
 }
 

@@ -103,7 +103,7 @@ module.exports = {
           .addSeparatorComponents((s) => s)
           .addTextDisplayComponents((t) =>
             t.setContent(
-              `### ${config.emoji_formate[s.server_name]} Serveur ${s.server_display_name}\n` +
+              `### ${config.serveur[s.server_name].emoji_formate} Serveur ${s.server_display_name}\n` +
                 `**Statut :** ${s.is_online ? "En ligne" : "Hors ligne"}\n` +
                 `**Argent :** ${s.balance.toLocaleString()}$\n` +
                 `**Grade :** ${s.server_rank}\n` +

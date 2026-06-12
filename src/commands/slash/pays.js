@@ -52,10 +52,10 @@ module.exports = {
     }
 
     const container = new ContainerBuilder()
-      .setAccentColor(config.couleur[serveur])
+      .setAccentColor(config.serveur[serveur].couleur)
       .addTextDisplayComponents((t) =>
         t.setContent(
-          `## ${config.emoji_formate[serveur]} ${data.country.name} ${config.serveurName[serveur]}`,
+          `## ${config.serveur[serveur].emoji_formate} ${data.country.name} ${config.serveur[serveur].nom}`,
         ),
       )
       .addSeparatorComponents((s) => s)

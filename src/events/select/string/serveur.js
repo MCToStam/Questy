@@ -28,7 +28,7 @@ module.exports = {
       .setAccentColor(parseInt(serveurData.colorHex.replace("#", ""), 16))
       .addTextDisplayComponents((t) =>
         t.setContent(
-          `## ${config.emoji_formate[serveur]} Serveur ${serveurData.displayName}${categorie !== "Accueil" ? ` - ${categorie}` : ""}${
+          `## ${config.serveur[serveur].emoji_formate} Serveur ${serveurData.displayName}${categorie !== "Accueil" ? ` - ${categorie}` : ""}${
             serveurData.description ? `\n*${serveurData.description}*` : ""
           }`,
         ),

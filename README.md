@@ -29,8 +29,8 @@ EarthQuest est un serveur Minecraft proposant une expérience immersive inspiré
 ### Cloner le projet
 
 ```bash
-git clone https://github.com/VOTRE-UTILISATEUR/questy.git
-cd questy
+git clone https://github.com/MCToStam/Questy.git
+cd Questy
 ```
 
 ### Installer les dépendances
@@ -90,8 +90,7 @@ pm2 start main.js --name Questy
 ├── src/
     ├── commands/
     └── events/
-├── utils
-└── ...
+└── utils
 ```
 
 ## 🤝 Contribution

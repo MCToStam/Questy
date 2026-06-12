@@ -1,7 +1,7 @@
 const config = require("../config");
 
 const serveurs = config.liste_serveur.map((s) => ({
-  name: config.serveurName[s],
+  name: config.serveur[s].nom,
   value: s,
 }));
 
