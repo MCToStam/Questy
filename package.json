@@ -1,7 +1,7 @@
 {
   "name": "questy",
   "version": "1.0.0",
-  "description": "",
+  "description": "Questy est un bot Discord conçu pour fournir aux joueurs et aux membres de la communauté des informations liées au serveur Minecraft EarthQuest.",
   "main": "main.js",
   "scripts": {
     "start": "node main.js",
