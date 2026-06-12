@@ -22,7 +22,7 @@ EarthQuest est un serveur Minecraft proposant une expérience immersive inspiré
 
 ### Prérequis
 
-- Node.js 18 ou supérieur
+- Node.js 19 ou supérieur
 - Un bot Discord créé sur le portail développeur Discord
 - Un token de bot Discord
 

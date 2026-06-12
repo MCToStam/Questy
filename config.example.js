@@ -1,6 +1,7 @@
 class config {
   constructor() {
     this.support_serveur_id = "";
+    this.support_serveur_invite = "";
     this.developpeur = ["719072181631320145"];
     this.colors = {
       error: 0xff0000,

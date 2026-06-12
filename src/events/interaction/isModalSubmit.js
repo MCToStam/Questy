@@ -1,4 +1,10 @@
-const { SeparatorSpacingSize, MessageFlags } = require("discord.js");
+const {
+  ContainerBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  MessageFlags,
+} = require("discord.js");
 const log = require("../../../util/module/log");
 const config = require("../../../config");
 
@@ -9,96 +15,89 @@ module.exports = async (client, interaction) => {
   try {
     await modal.execute(client, interaction, config);
   } catch (e) {
-    const errorContainer = {
-      type: 17,
-      accent_color: config.colors.error,
-      components: [
-        {
-          type: 10,
-          content: "## :x: Une erreur est survenue",
-        },
-        {
-          type: 14,
-          spacing: SeparatorSpacingSize.Large,
-        },
-        {
-          type: 10,
-          content:
-            "Une erreur est survenue lors de l'exécution de cette intéraction. Si le problème se reproduit, il est important de le signaler sur le [serveur support](https://discord.gg/tFkb9nYSd8).",
-        },
-      ],
-    };
+    const errorContainer = new ContainerBuilder()
+      .setAccentColor(config.colors.error)
+      .addTextDisplayComponents((textDisplay) =>
+        textDisplay.setContent("## ❌ Erreur"),
+      )
+      .addSeparatorComponents((separator) => separator)
+      .addTextDisplayComponents((textDisplay) =>
+        textDisplay.setContent(
+          "Une erreur est survenue lors de l'exécution de cette intéraction. Si le problème se reproduit, il est important de le signaler sur le serveur support.",
+        ),
+      );
+
+    if (
+      config.support_serveur_invite &&
+      (config.support_serveur_invite.startsWith("https://") ||
+        config.support_serveur_invite.startsWith("http://"))
+    ) {
+      errorContainer
+        .addSeparatorComponents((separator) => separator)
+        .addActionRowComponents(
+          new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setURL("config.support_serveur_invite")
+              .setEmoji("1307452239052279858")
+              .setLabel("Serveur Support")
+              .setStyle(ButtonStyle.Link),
+          ),
+        );
+    }
 
     if (interaction.deferred || interaction.replied) {
       await interaction.followUp({
         components: [errorContainer],
         flags: MessageFlags.IsComponentsV2 | MessageFlags.Ephemeral,
-        allowedMentions: { parse: [] },
       });
     } else {
       await interaction.reply({
         components: [errorContainer],
         flags: MessageFlags.IsComponentsV2 | MessageFlags.Ephemeral,
-        allowedMentions: { parse: [] },
       });
     }
+
     log(e, "error", "red");
 
     const channel = await client.channels.fetch(config.log_channels.error);
 
-    const errorLogContainer = {
-      type: 17,
-      accent_color: config.colors.error,
-      components: [
-        {
-          type: 10,
-          content: "## ❌ Erreur",
-        },
-        {
-          type: 14,
-          spacing: 1,
-        },
-        {
-          type: 10,
-          content: `**🔧 Action Effectuée :** ${interaction.customId}`,
-        },
-        {
-          type: 10,
-          content: `**💢 Erreur :** \`\`\`${e}\`\`\``,
-        },
-      ],
-    };
+    const errorLogContainer = new ContainerBuilder()
+      .setAccentColor(config.colors.error)
+      .addTextDisplayComponents((textDisplay) =>
+        textDisplay.setContent("## ❌ Erreur"),
+      )
+      .addSeparatorComponents((separator) => separator)
+      .addTextDisplayComponents((textDisplay) =>
+        textDisplay.setContent(
+          `**🔧 Action Effectuée :** ${interaction.customId}`,
+        ),
+      )
+      .addTextDisplayComponents((textDisplay) =>
+        textDisplay.setContent(`**💢 Erreur :** \`\`\`${e}\`\`\``),
+      );
 
     await channel.send({
       components: [errorLogContainer],
-      flags: 32768,
-      allowedMentions: { parse: [] },
+      flags: MessageFlags.IsComponentsV2,
     });
   }
 
   const channel = await client.channels.fetch(config.log_channels.modal);
 
-  const logContainer = {
-    type: 17,
-    accent_color: config.colors.success,
-    components: [
-      {
-        type: 10,
-        content: "## 📗 Log",
-      },
-      {
-        type: 14,
-        spacing: SeparatorSpacingSize.Small,
-      },
-      {
-        type: 10,
-        content: `**👷 Utilisateur :** ${
+  const logContainer = new ContainerBuilder()
+    .setAccentColor(config.colors.success)
+    .addTextDisplayComponents((textDisplay) =>
+      textDisplay.setContent("## 📗 Log"),
+    )
+    .addSeparatorComponents((separator) => separator)
+    .addTextDisplayComponents((textDisplay) =>
+      textDisplay.setContent(
+        `**👷 Utilisateur :** ${
           interaction.user.globalName?.replace(/_/g, "\\_") ||
-          interaction.user.username
-        } (<@${interaction.user.id}>)\n**🔧 Valeur :** ${interaction.customId}`,
-      },
-    ],
-  };
+          interaction.user.username?.replace(/_/g, "\\_")
+        } (<@${interaction.user.id}>)\n**🔧 Valeur :** ${interaction.customId.replace(/_/g, "\\_")}`,
+      ),
+    );
 
   await channel.send({
     components: [logContainer],

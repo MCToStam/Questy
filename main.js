@@ -1,5 +1,7 @@
 if (Number(process.version.slice(1).split(".")[0]) < 19)
-  throw new Error("Node 19.x is required. Update Node on your system.");
+  throw new Error(
+    "Node 19.x est requis. Mettez à jour Node sur votre système.",
+  );
 require("dotenv").config({ quiet: true });
 
 const {
@@ -48,6 +50,7 @@ client.container = {
 
 const init = async () => {
   await connectMongo();
+
   async function load(type, dirPath, typeLog) {
     if (!existsSync(dirPath)) return;
 
@@ -111,7 +114,7 @@ const init = async () => {
     client.on(eventName, event.bind(null, client));
   }
 
-  client.login().then(async () => {
+  client.login(); /*.then(async () => {
     const guild = client.guilds.cache.get(config.support_serveur_id);
     const guildCmds = guild.commands;
     const cmd = client.container.slashCmds;
@@ -119,7 +122,7 @@ const init = async () => {
     await guildCmds
       .set(cmdSlashs.map((c) => c.data))
       .catch((e) => console.log(e));
-  });
+  });*/
   log(`Node ${process.version} !`, "READY", "green");
 };
 
